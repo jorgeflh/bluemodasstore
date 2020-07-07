@@ -33,9 +33,9 @@ namespace BlueModasStore.Infra.Repositories
 
             using (IDbConnection conn = Connection)
             {
-                string sql = "INSERT INTO Product(Name, Description, Price, Image) VALUES(@Name, @Description, @Price)";
+                string sql = "INSERT INTO Product(Name, Price, Image) VALUES(@Name, @Price, @Image)";
                 conn.Open();
-                var result = await conn.ExecuteAsync(sql, new { product.Name, product.Description, product.Price, product.Image });
+                var result = await conn.ExecuteAsync(sql, new { product.Name, product.Price, product.Image });
 
                 if (result > 0)
                     added = true;
@@ -90,10 +90,10 @@ namespace BlueModasStore.Infra.Repositories
             using (IDbConnection conn = Connection)
             {
                 string sql = "UPDATE Product " +
-                             "SET Name = @Name, Description = @Description, Price = @Price, Image = @Image " +
+                             "SET Name = @Name, Price = @Price, Image = @Image " +
                              "WHERE Id = @Id";
                 conn.Open();
-                var result = await conn.ExecuteAsync(sql, new { product.Name, product.Description, product.Price, product.Image });
+                var result = await conn.ExecuteAsync(sql, new { product.Id, product.Name, product.Price, product.Image });
 
                 if (result > 0)
                     updated = true;
