@@ -11,6 +11,6 @@ namespace BlueModasStore.Domain.Interfaces.Repositories
         Task<Order> GetOrderById(int id);
         Task<List<Order>> GetOrdersByCustomer(int CustomerId);
         Task<bool> AddOrder(Order order);
-        Task<bool> UpdateOrder(Order order);
+        Task<bool> UpdateStatus(Order order);
     }
 }
