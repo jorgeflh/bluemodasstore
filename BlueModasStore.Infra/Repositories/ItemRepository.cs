@@ -84,5 +84,20 @@ namespace BlueModasStore.Infra.Repositories
 
             return false;
         }
+
+        public async Task<bool> UpdateItem(Item item)
+        {
+            using (IDbConnection conn = Connection)
+            {
+                string sql = "UPDATE FROM Item SET Quantity = @Quantity WHERE Id = @Id";
+                conn.Open();
+                var result = await conn.ExecuteAsync(sql, new { item.Id, item.Quantity });
+
+                if (result > 0)
+                    return true;
+            }
+
+            return false;
+        }
     }
 }

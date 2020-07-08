@@ -3,6 +3,6 @@
     public enum OrderEnum
     {
         Open,
-        Closed
+        Finished
     }
 }

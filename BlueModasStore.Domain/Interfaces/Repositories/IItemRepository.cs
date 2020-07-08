@@ -9,6 +9,7 @@ namespace BlueModasStore.Domain.Interfaces.Repositories
         Task<Item> GetItem(int id);
         Task<List<Item>> GetItems(int orderId);
         Task<bool> AddItem(Item item);
+        Task<bool> UpdateItem(Item item);
         Task<bool> RemoveItem(int id);
     }
 }

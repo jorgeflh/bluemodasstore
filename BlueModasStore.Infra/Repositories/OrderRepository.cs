@@ -27,24 +27,21 @@ namespace BlueModasStore.Infra.Repositories
             }
         }
 
-        public async Task<bool> AddOrder(Order order)
+        public async Task<int> AddOrder(Order order)
         {
             using (IDbConnection conn = Connection)
             {
                 string sql = "INSERT INTO Order(CustomerId, Status) " +
                              "VALUES(@CustomerId, @Status)";
                 conn.Open();
-                var result = await conn.ExecuteAsync(sql, new
+                var id = await conn.QuerySingleAsync<int>(sql, new
                 {
                     order.CustomerId,
                     order.Status
                 });
 
-                if (result > 0)
-                    return true;
+                return id;
             }
-
-            return false;
         }
 
         public async Task<Order> GetOrderById(int id)
