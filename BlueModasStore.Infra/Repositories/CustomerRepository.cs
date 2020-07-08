@@ -10,11 +10,12 @@ using System.Threading.Tasks;
 
 namespace BlueModasStore.Infra.Repositories
 {
-    public class ProductRepository : IProductRepository
+    public class CustomerRepository : ICustomerRepository
     {
+
         private readonly IConfiguration config;
 
-        public ProductRepository(IConfiguration config)
+        public CustomerRepository(IConfiguration config)
         {
             this.config = config;
         }
@@ -27,18 +28,19 @@ namespace BlueModasStore.Infra.Repositories
             }
         }
 
-        public async Task<bool> AddProduct(Product product)
+        public async Task<bool> AddCustomer(Customer customer)
         {
             using (IDbConnection conn = Connection)
             {
-                string sql = "INSERT INTO Product(Name, Price, Image) " +
-                             "VALUES(@Name, @Price, @Image)";
+                string sql = "INSERT INTO Customer(Name, Email, Phone) " +
+                             "VALUES (@Name, @Email, @Phone)";
+
                 conn.Open();
                 var result = await conn.ExecuteAsync(sql, new
                 {
-                    product.Name,
-                    product.Price,
-                    product.Image
+                    customer.Name,
+                    customer.Email,
+                    customer.Phone
                 });
 
                 if (result > 0)
@@ -48,33 +50,33 @@ namespace BlueModasStore.Infra.Repositories
             return false;
         }
 
-        public async Task<Product> GetProductById(int id)
+        public async Task<Customer> GetCustomerById(int id)
         {
             using (IDbConnection conn = Connection)
             {
-                string sql = "SELECT * FROM Product WHERE Id = @Id";
+                string sql = "SELECT * FROM Customer WHERE Id = @Id";
                 conn.Open();
-                var result = await conn.QueryAsync<Product>(sql, new { Id = id });
+                var result = await conn.QueryAsync<Customer>(sql, new { Id = id });
                 return result.FirstOrDefault();
             }
         }
 
-        public async Task<List<Product>> GetProducts()
+        public async Task<List<Customer>> GetCustomers()
         {
             using (IDbConnection conn = Connection)
             {
-                string sql = "SELECT * FROM Product";
+                string sql = "SELECT * FROM Customer";
                 conn.Open();
-                var result = await conn.QueryAsync<Product>(sql);
+                var result = await conn.QueryAsync<Customer>(sql);
                 return result.ToList();
             }
         }
 
-        public async Task<bool> RemoveProduct(int id)
+        public async Task<bool> RemoveCustomer(int id)
         {
             using (IDbConnection conn = Connection)
             {
-                string sql = "DELETE FROM Product WHERE Id = @Id";
+                string sql = "DELETE FROM Customer WHERE Id = @Id";
                 conn.Open();
                 var result = await conn.ExecuteAsync(sql, new { Id = id });
 
@@ -85,20 +87,19 @@ namespace BlueModasStore.Infra.Repositories
             return false;
         }
 
-        public async Task<bool> UpdateProduct(Product product)
+        public async Task<bool> UpdateCustomer(Customer customer)
         {
             using (IDbConnection conn = Connection)
             {
-                string sql = "UPDATE Product " +
-                             "SET Name = @Name, Price = @Price, Image = @Image " +
+                string sql = "UPDATE Customer " +
+                             "SET Name = @Name, @Phone " +
                              "WHERE Id = @Id";
                 conn.Open();
                 var result = await conn.ExecuteAsync(sql, new
                 {
-                    product.Id,
-                    product.Name,
-                    product.Price,
-                    product.Image
+                    customer.Id,
+                    customer.Name,
+                    customer.Phone
                 });
 
                 if (result > 0)
