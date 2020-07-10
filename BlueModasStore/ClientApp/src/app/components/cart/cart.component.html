@@ -1,1 +1,20 @@
-<p>cart works!</p>
+<h4>Minha Compra</h4>
+
+<div class="card" *ngFor="let item of order.items">
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-3">
+        <img src="../../../assets/images/{{item.productImage}}" class="img-fluid img-thumbnail w-25" />
+      </div>
+      <div class="col-md-3">
+        <p>{{item.productName}}</p>
+      </div>
+      <div class="col-md-3">
+        <input type="number" value="{{item.quantity}}" min="1" />
+      </div>
+      <div class="col-md-3">
+        <p>R$ {{item.productPrice}}</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -36,6 +36,10 @@ export class OrderService {
         quantity: quantity
       },
       options
-    );
+    );   
+  }
+
+  GetOrder(orderId): Observable<Order> {
+    return this.httpClient.get<Order>(`${this.baseUrl}Order/GetOrder/${orderId}`)
   }
 }
