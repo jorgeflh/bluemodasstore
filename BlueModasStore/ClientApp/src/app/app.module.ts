@@ -13,6 +13,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { CartComponent } from './components/cart/cart.component';
 import { CheckoutComponent } from './components/checkout/checkout.component';
 import { OrderReviewComponent } from './components/order-review/order-review.component';
+import { IdentityComponent } from './components/identity/identity.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { OrderReviewComponent } from './components/order-review/order-review.com
     CartComponent,
     CheckoutComponent,
     OrderReviewComponent,
+    IdentityComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -32,9 +34,8 @@ import { OrderReviewComponent } from './components/order-review/order-review.com
     FormsModule,
     RouterModule.forRoot([
       { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
-      { path: 'cart', component: CartComponent }
+      { path: 'cart', component: CartComponent },
+      { path: 'identity', component: IdentityComponent }
     ])
   ],
   providers: [],

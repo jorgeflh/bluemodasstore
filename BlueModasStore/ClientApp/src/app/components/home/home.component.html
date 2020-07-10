@@ -1,5 +1,5 @@
 <section id="products-list">
-  <div class="row">
+  <div class="row" *ngIf="products">
     <div class="col-md-4 col-sm-2" *ngFor="let product of products">
       <div class="card mb-4">
         <img src="../../assets/images/{{product.image}}" class="card-img-top" />

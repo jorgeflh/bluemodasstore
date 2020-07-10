@@ -42,4 +42,39 @@ export class OrderService {
   GetOrder(orderId): Observable<Order> {
     return this.httpClient.get<Order>(`${this.baseUrl}Order/GetOrder/${orderId}`)
   }
+
+  UpdateItem(itemId, quantity): Observable<Order> {
+    let httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+
+    let options = {
+      headers: httpHeaders
+    }
+
+    return this.httpClient.post<Order>(`${this.baseUrl}Order/UpdateItem`,
+      {
+        itemId: parseInt(itemId),
+        quantity: parseInt(quantity)
+      },
+      options
+    );
+  }
+
+  RemoveItem(itemId): Observable<Order> {
+    let httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+
+    let options = {
+      headers: httpHeaders
+    }
+
+    return this.httpClient.post<Order>(`${this.baseUrl}Order/RemoveItem`,
+      {
+        itemId: parseInt(itemId)
+      },
+      options
+    );
+  }
 }

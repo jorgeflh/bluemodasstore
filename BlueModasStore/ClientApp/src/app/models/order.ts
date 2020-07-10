@@ -5,4 +5,5 @@ export class Order {
   customerId: number;
   status: string;
   items: Item[];
+  total: number;
 }

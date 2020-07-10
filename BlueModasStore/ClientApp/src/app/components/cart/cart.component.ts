@@ -21,6 +21,32 @@ export class CartComponent implements OnInit {
 
   ngOnInit() {
     this.orderId = localStorage.getItem("OrderId");
+
+    if (this.orderId !== null) {
+      this.getOrder();
+    }
+
+    console.log("Order length: " + this.order.items.length);
+  }
+
+  updateQuantity(item, value) {
+    console.log(item);
+    console.log(value);
+    this.orderService.UpdateItem(item.id, value).subscribe((data) => {
+      console.log(data);
+      this.getOrder();
+    });
+  }
+
+  removeItem(itemId) {
+    console.log(itemId);
+    this.orderService.RemoveItem(itemId).subscribe((data) => {
+      console.log(data);
+      this.getOrder();
+    })
+  }
+
+  getOrder() {
     this.orderService.GetOrder(this.orderId).subscribe((data) => {
       console.log(data);
       this.order = data;
