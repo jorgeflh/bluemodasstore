@@ -1,1 +1,21 @@
-<p>identity works!</p>
+<h4>Identiticação do Cliente</h4>
+
+<div class="row mt-2">
+  <div class="col-md-6 offset-md-3">
+    <form #form="ngForm" (ngSubmit)="onSubmit(form.value)">
+      <div class="form-group">
+        <label for="name">Nome</label>
+        <input type="text" class="form-control" ngModel name="name" required />
+      </div>
+      <div class="form-group">
+        <label for="email">E-mail</label>
+        <input type="email" class="form-control" ngModel name="email" required />
+      </div>
+      <div class="form-group">
+        <label for="phone">Telefone</label>
+        <input type="text" class="form-control" ngModel name="phone" required />
+      </div>
+      <button type="submit" class="btn btn-success btn-block">Concluir Pedido</button>
+    </form>
+  </div>
+</div>

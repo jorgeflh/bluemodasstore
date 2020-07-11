@@ -1,1 +1,65 @@
-<p>checkout works!</p>
+<h4>Pedido Finalizado</h4>
+
+<div class="row mt-4">
+  <div class="col-md-8">
+    <div class="card" *ngIf="order">
+      <div class="card-header"><h5>Número do Pedido: {{order.id}}</h5></div>
+      <div class="card-body">
+        <div class="row mb-2 cart-items align-items-center" *ngFor="let item of order.items">
+          <div class="col-md-2">
+            <img src="../../../assets/images/{{item.productImage}}" class="img-fluid img-thumbnail w-75 mb-2" />
+          </div>
+          <div class="col-md-6">
+            <p>{{item.productName}}</p>
+          </div>
+          <div class="col-md-2">
+            <strong>{{item.price}}</strong>
+          </div>
+          <div class="col-md-2 text-right">
+            <strong>{{item.productPrice | currency:'BRL'}}</strong>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer">
+        <div class="row">
+          <div class="offset-8 col-md-2 text-right"><strong>TOTAL</strong></div>
+          <div class="col-md-2 text-right" *ngIf="order"><strong>{{order.total | currency:'BRL'}}</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card mb-2">
+      <a class="btn btn-primary btn-block" [routerLink]="['/']">Continuar Comprando</a>
+    </div>
+    <div class="card bg-light mb-3" *ngIf="order !== undefined && order.items.length !== 0">
+      <div class="card-header"><h5>Cliente</h5></div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-4 text-right">
+            <strong>Nome:</strong>
+          </div>
+          <div class="col-md-8">
+            {{order.customer.name}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 text-right">
+            <strong>E-mail:</strong>
+          </div>
+          <div class="col-md-8">
+            {{order.customer.email}}
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 text-right">
+            <strong>Telefone:</strong>
+          </div>
+          <div class="col-md-8">
+            {{order.customer.phone}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -8,7 +8,7 @@ namespace BlueModasStore.Domain.Interfaces.Services
     {
         Task<List<Customer>> GetCustomers();
         Task<Customer> GetCustomerById(int id);
-        Task<bool> AddCustomer(Customer customer);
+        Task<Customer> AddCustomer(Customer customer);
         Task<bool> UpdateCustomer(Customer customer);
         Task<bool> RemoveCustomer(int id);
     }

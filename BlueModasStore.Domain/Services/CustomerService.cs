@@ -15,7 +15,7 @@ namespace BlueModasStore.Domain.Services
             this.customerRepository = customerRepository;
         }
 
-        public Task<bool> AddCustomer(Customer customer)
+        public Task<Customer> AddCustomer(Customer customer)
         {
             return customerRepository.AddCustomer(customer);
         }

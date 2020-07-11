@@ -31,8 +31,9 @@ namespace BlueModasStore.Infra.Repositories
         {
             using (IDbConnection conn = Connection)
             {
-                string sql = "INSERT INTO Order(CustomerId, Status) " +
-                             "VALUES(@CustomerId, @Status)";
+                string sql = @"INSERT INTO [Order](CustomerId, Status)
+                               OUTPUT INSERTED.Id
+                               VALUES(@CustomerId, @Status)";
                 conn.Open();
                 var id = await conn.QuerySingleAsync<int>(sql, new
                 {
@@ -48,10 +49,17 @@ namespace BlueModasStore.Infra.Repositories
         {
             using (IDbConnection conn = Connection)
             {
-                string sql = "SELECT * FROM Order WHERE Id = @Id";
+                string sql = "SELECT * FROM [Order] WHERE Id = @Id";
                 conn.Open();
                 var result = await conn.QueryAsync<Order>(sql, new { Id = id });
-                return result.FirstOrDefault();
+                var order = result.FirstOrDefault();
+
+                sql = "SELECT * FROM [Item] WHERE OrderId = @OrderId";
+                var result2 = await conn.QueryAsync<Item>(sql, new { OrderId = order.Id });
+
+                order.Items = result2.ToList();
+
+                return order;
             }
         }
 
@@ -59,24 +67,25 @@ namespace BlueModasStore.Infra.Repositories
         {
             using (IDbConnection conn = Connection)
             {
-                string sql = "SELECT * FROM Order WHERE CustomerId = @CustomerId";
+                string sql = "SELECT * FROM [Order] WHERE CustomerId = @CustomerId";
                 conn.Open();
                 var result = await conn.QueryAsync<Order>(sql, new { CustomerId });
                 return result.ToList();
             }
         }
 
-        public async Task<bool> UpdateStatus(Order order)
+        public async Task<bool> UpdateOrder(Order order)
         {
             using (IDbConnection conn = Connection)
             {
-                string sql = "UPDATE Order " +
-                             "SET Status = @Status " +
+                string sql = "UPDATE [Order] " +
+                             "SET CustomerId = @CustomerId, Status = @Status " +
                              "WHERE Id = @Id";
                 conn.Open();
                 var result = await conn.ExecuteAsync(sql, new
                 {
                     order.Id,
+                    order.CustomerId,
                     order.Status
                 });
 

@@ -1,4 +1,5 @@
 ﻿using BlueModasStore.Domain.Enum;
+using System.Collections.Generic;
 
 namespace BlueModasStore.Domain.Models
 {
@@ -7,5 +8,6 @@ namespace BlueModasStore.Domain.Models
         public int Id { get; set; }
         public int CustomerId { get; set; }
         public OrderEnum Status { get; set; }
+        public List<Item> Items { get; set; }
     }
 }

@@ -89,7 +89,7 @@ namespace BlueModasStore.Infra.Repositories
         {
             using (IDbConnection conn = Connection)
             {
-                string sql = "UPDATE FROM Item SET Quantity = @Quantity WHERE Id = @Id";
+                string sql = "UPDATE [Item] SET Quantity = @Quantity WHERE Id = @Id";
                 conn.Open();
                 var result = await conn.ExecuteAsync(sql, new { item.Id, item.Quantity });
 

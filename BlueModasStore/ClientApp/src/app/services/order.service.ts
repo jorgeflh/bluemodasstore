@@ -77,4 +77,22 @@ export class OrderService {
       options
     );
   }
+
+  FinishOrder(orderId, customerId): Observable<Order> {
+    let httpHeaders = new HttpHeaders({
+      'Content-Type': 'application/json'
+    });
+
+    let options = {
+      headers: httpHeaders
+    }
+
+    return this.httpClient.post<Order>(`${this.baseUrl}Order/FinishOrder`,
+      {
+        orderId: parseInt(orderId),
+        customerId: parseInt(customerId)
+      },
+      options
+    );
+  }
 }
