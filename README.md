@@ -18,7 +18,7 @@ Para o banco de dados foi utilizado o **Sql Server 2016 Express Edition**.
 
 Para testar o projeto, clone o repositório e abra o arquivo **BlueModasStore.sln** no Visual Studio.
 
-Dentro do projeto BlueModasStore existe um diretório chamado **BackupSql** com um banco pré-preenchido chamado BlueModas.bak. 
+Dentro do projeto BlueModasStore existe um diretório chamado **BackupSql** com um banco populado chamado BlueModas.bak. 
 Restaure esse arquivo no Sql Server.
   > Para simplificação, foi adicionado 6 produtos no banco de dados, e suas imagens estão armazenadas dentro da pasta *ClientApp/src/assets/images*.
   
